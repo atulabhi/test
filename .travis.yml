@@ -34,7 +34,7 @@ after_success:
    - npm run coverage -t 64458862-53bd-4ddc-8a66-e005385756cc
    - if  [ $TRAVIS_PULL_REQUEST = "false" ]; then
       export REPO=avneetsingh/openebs-website;
-      docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -f openebs_pro/Dockerfile -t $REPO:$COMMIT . && docker push $REPO;
+      docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -f Dockerfile -t $REPO:$COMMIT . && docker push $REPO;
      fi  
 notifications:
   email:
