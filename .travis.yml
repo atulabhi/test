@@ -7,13 +7,14 @@ env:
     - secure: "QWunpeJwmWleCJpdyD4Ss/4Zd6fZF2oxnTl5O1kJ7c0oO6fBVWmWQVOQAMKLvrQCsu/RQOiFfyD4FKTpYMG5s1kO5Vj3kWsYes7S+6q3yJX5/PneizZXQZzO20l9T09bkXoeGVZ7pTIiwWyrLHdFSiQQ11Xpu/yCIphqZ/zFR6Zw3/MsnV+RIlLYelHNAdxqQ1aQLrMXfvEui6DjdRmDr9ndmuFxTfydNAwnfpKnPx4zNN30w+mSV1fzPI/Z6bfYVbf90/8QNF5noMc0b2W0Y1exfHolhn/Nc4N3nWr7ppOtR2dGoXlvS4cfkskCdjZRyXUvf0wXV2kRBRHFPquR1HsFBsLy83wLZGiLWebB3f+ztNBsVraq5T5bHfpW7eCKoEeOk5UAagBivAI2HeAQWXiiqrwv6lU+mToM0qTzUzEfOc8k/fQ8fevY3kG9jDeEyGaYAC6TxbBGmhFadGSaJ7OmSoJgUkaGicVgXWcw30qQEW4ngdjSn2r3osNywQpMMOiEINJpimYf3q0s+P33eZ5hbAWNjmM7CmgWp8/nulLqR3Fv3e6lIrygSaKniwlyCoTF+GtlhAEvjtI2wp15Byq3O3dRgT/v87daIQOxd6/rkSl4MoMAGeODL6EpxN3iZQfN+0AK6kIaNiNcA5VHSY7cXfJ31BmVbXgaZfAIaHE="
     - COMMIT: TRAVIS_COMMIT::6
 before_install:
-    - npm install
-    - ng build
+    - npm install -g @angular/cli
 
 sudo: required
 
 services:
     - docker
+script:
+   - ng build --prod
   
 after_success:
     - if  [ $TRAVIS_PULL_REQUEST = "false" ]; then
