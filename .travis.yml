@@ -1,30 +1,22 @@
 language: node_js
-node_js: "stable"
-env:
-  global:
-    # Travis limits maximum log size, we have to cut tests output 
-    - secure: "MTki/yfsGipvUx4tFsdv7mf2QhKxuZtwdSDZZeegUaPDD4lgdntXdzE76xm+lu7Y+22XAGp7K+0UlwdJUs6Gqzs1sD+1IV7fgrNSAuIroGkSLnnMwa3rktw1lhNP+nwnhLnExfHkgmN+xCxuCNavN7JM99W3Ajtn6eVEnv93IGTkmiSjuTfug48hV0hR+MSWRjK6gC7BvWCJwS0waAq4LAxZ5qClkOTP3HnUbEoRIAAGnIQLAl1tvRECKGb3o4QTnb4cKNeYmt7c7Ea2Kk5J17E0tIZaZiydQ8K7d0cpOrkIYalRTNHJCsk1HcYvywN57Yq/yeeX64lHJF8m8C9MHDkqzPV1XpfTDmGQhBcyJn4y4cqeC4V2dd+ps2CsAMaxBT5u0FveXtlhSu4PXKbxbywAQtTYdgOpbdcLnmMqqfNB3Brom5EW+nQYfebL3WYZ/PNYtmPzxFzqLQK31VXvbdukr7dGnFoh/QhQ2qYRqXS/1n7VrfJWZ4v7D/ji11oSWmPjhyW9gTewAR9IYIQEsj9n9U88ie1o9vv5NXMDmIdFCRpt27ha9KLIomb3tFrZRMnRLGWOY/Eb5T0dVdreXVW+0WVGuN71o3EKoPEcKJcHdPEXoAKfwvWxSyoOKF7Qx5TIYLBv6wyusN32Mjm+yB5QU8/5CDsL9/W/zJK0OaA="
-    - secure: "L+JC9TR//RfMqkPuujn9LSon0DK2dqu6sVBmjiLGs/sfOcCmVY/TX9RFdwCA68FvTz1DMnrExoZjyBrCBUw6DNxUeUPzlbxNpWjTQ4ZtRy44qWNXax+UiSIy1ZxJGuqwQ0wVPZMi6T+bfneaPgMXXMJsTU376nZ8XCstgEIi/HWyLhg11YNL8lzbxA/JcVCZk6ydeUb7I6gv4eLdOBTFqaFExF6En4G5+pZ/+uWS27+EjEtRpBiYrQgSyV0JjSpW+WlPAv/ohwolF8DQqZF3AUgDibKZ+tic0ATmW4h+LGYy58QlFlowj/fxN+qfu6TCEDXB7Ac0RT7RaZgNn2Xv47hHi1W3z37X2X3dxxpkaiPhOZaNsxpAY8qNOHBV6ZB5oTqSQNk+GhIjS7e1aXq6sBhf9WMFcAVNFxyhXP1XKI06mGQUtLilQlWqfND8MTcrBr+IqxVwzXg5RWJucrxh1joT6reSMamzssg3aqRPuiFCwzha8bLgtJRBDu5FRbG94MXxFdG7TjOr/IlaNTWPZq+tsxRWdil4w+s5nMELUul2A21Bqp2VkfpzWDv08klQ7p0uiqDgU/bSLHaj4YcxUNgydWZTT8kBgob2ETlveJOfsMo19jktPbC6qIAYVVviDxVaUX29Z+946ivr6g9P1oQDR9Ty+RHwmBoFgn6TaTg="
-    - secure: "QWunpeJwmWleCJpdyD4Ss/4Zd6fZF2oxnTl5O1kJ7c0oO6fBVWmWQVOQAMKLvrQCsu/RQOiFfyD4FKTpYMG5s1kO5Vj3kWsYes7S+6q3yJX5/PneizZXQZzO20l9T09bkXoeGVZ7pTIiwWyrLHdFSiQQ11Xpu/yCIphqZ/zFR6Zw3/MsnV+RIlLYelHNAdxqQ1aQLrMXfvEui6DjdRmDr9ndmuFxTfydNAwnfpKnPx4zNN30w+mSV1fzPI/Z6bfYVbf90/8QNF5noMc0b2W0Y1exfHolhn/Nc4N3nWr7ppOtR2dGoXlvS4cfkskCdjZRyXUvf0wXV2kRBRHFPquR1HsFBsLy83wLZGiLWebB3f+ztNBsVraq5T5bHfpW7eCKoEeOk5UAagBivAI2HeAQWXiiqrwv6lU+mToM0qTzUzEfOc8k/fQ8fevY3kG9jDeEyGaYAC6TxbBGmhFadGSaJ7OmSoJgUkaGicVgXWcw30qQEW4ngdjSn2r3osNywQpMMOiEINJpimYf3q0s+P33eZ5hbAWNjmM7CmgWp8/nulLqR3Fv3e6lIrygSaKniwlyCoTF+GtlhAEvjtI2wp15Byq3O3dRgT/v87daIQOxd6/rkSl4MoMAGeODL6EpxN3iZQfN+0AK6kIaNiNcA5VHSY7cXfJ31BmVbXgaZfAIaHE="
-    - COMMIT=${TRAVIS_COMMIT::6}
+node_js: stable
 before_install:
-    - npm install -g @angular/cli
-
+- npm install -g @angular/cli
 sudo: required
-
 services:
-    - docker
+- docker
 script:
-   - ng build --prod
-  
+- ng build --prod
 after_success:
-    - if  [ $TRAVIS_PULL_REQUEST = "false" ]; then
-        export REPO=avneetsingh/openebs-website;
-        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -f Dockerfile -t $REPO:$COMMIT . && docker push $REPO;
-      fi  
-
+- if  [ $TRAVIS_PULL_REQUEST = "false" ]; then export REPO=avneetsingh/openebs-website;
+  docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -f Dockerfile -t
+  $REPO:$COMMIT . && docker push $REPO; fi
 notifications:
   email:
     on_success: never
 on_failure: always
-
+env:
+  global:
+  - secure: jDsXwG3NJ87l3QGO8lxL2hUIBmu5EVSMbbf+9ueU4R6u2DlFw+oeDFanOTtdXKzXismrF8dWj/q3Ze8PEfQCfL+X4wVD9yLYS4SMDC02ed54v2UKi9nkYndLEa2ejQe9z/FsSmYYoIWkEaY0FSVHp3DHyg+PS4uqgMQHipv7TI4Bib5QMsVJ8HeqXXmcYA90uUrvrzkhlgWzFpEmdhcq0L7aM9+KSgY3UqrlmujGfGMUzG7cfyw8S1leqmckW/XLd1YscnOQwx0ZNoFf52+2fVBjXnpb+WS0FkqgOpZj7sKWoFEvnbKfhbBOuzzIgFOOHzcZQ9onnUclPJ3qZMQ8NHiFeG62Pu2z51D2oET6z+s+foC4WcZH5WqAPYrWVlen/3XA7ijeokfabFNjBm7Xyb8dJZFh7KgpZge9qDkugB9y/n07rZ8s6WMo+3+lrOiVdIrzVr5sI3qsxjQKlgmpz6obf9L1geRfBaNdfdhCsqujTk6rDSO7HVFBmxGboRyDjCrhawxybNi/FYWsqGuj91XC/VdNDDYgww++CrJwL3pVRtIcxDexkW9lyWZgn9w1ARNpNp0ihqX1XBe3EFQdyqRhO3ITdFI7gjRK/BzYOgEgG+yeFYH7k5OWNFFswtFqMhShD1Ey8lVk37crotlV3xXXUdNUkPpzgWtVhWsrzz8=
+  - secure: n0+b9p0iSqSU6shUrrOCcHJczjEQGR9RSaJTW6eyoVXl2sgC93lbA62b5Vp5BJOPTesQ7M/tl4sF8vXo6NHg6K06v1tBsKn/TgBzU9cr2IeFkV2uK2qmIaGMBK2Vmreqi8bGbnzHiii2lDp+0wlWfmfwj1Xs2CK9gDbVscjuJq4CEDr6127GBzXjXEZrWDwa4qywrhCQJU//dRJiMjBhq89p0Ca9dJQr4IsVoBItEySpd0NWOSaAx9CXVwA+1NbGATuzJ1fPre7CqT39QXeyxjpF62Z07wsdtf5KRQDZMIKertY852A59M605sLmE9HuFQtv6bC0Aq/vCShRTYtTxnE5Mq6qRnn9XyMTIvCVy55uuxk4+UaYHnUz1vre5oeAmyUmrt6f6ewbFhLRDCJHRsQpnYuudPFLpaTB8oXoU+fy1Y1Y8OiDH1iwFpdFRCmoBLLMKB+FepMM1Fw/FLOuzyuVIe8hIUKMyUFGPfBk8PBcgteshhIobj5XWfv6Vf/Q5hVGffZrJ8L9zyM15vT25e93629Kfln+UP/cBfaF3wigjrJJ9VpY92M9xR/9Dxk5exlwEeNC5M9uzKzgU1nodyOAQiG/GZ8j74HPvwJRpMPMSmtjClIx2btHqLhMlPUdGcA+cPTxTga1XRzPkY/hx099mY73rQgKZozV8ulUK8s=
+  - secure: ZrHqr+opTg7LExcqIEQgY8djmta0V/rDj1xJB6RaE3kmpvOdaWyU3Oe1VCiekJmqia1CdiFlg/8eYDL8HPPGCfoq7cQbQMpxFoAIv0zbdUs+huoy2OZmmgPjI3shl7fMt+3ZAIRWVI3WNBIDDJasetGTR6aWf2YGfgI6HAixNCkacP3pD0utGcmu5RWGGN+IreBZtRFQS5hYern1ILq8jCpVKt+QOdVNE4D+lXGpIlXY4kgul3YuU+D6mD+1N/8i7KmgT50rTB/Sr9Cfn85j5xqwh5VHcdf8v9z6VVs8ulczYy/KKV6ZMJUQAcraRNvwQsLl7MqchX3yzF8Q0LvtQCqcqKyXK0aoSl4drFdNzf0rQ/N5vR14UIP6A/aCIP09gpsxeumC8RWjLDtACTLGodU5JhqBCgmYNhfVO17+EzXbvjuhf0uB31f7zI25mGiHSqdRfoG+/yZ/eNpuBhCJ0Nu/LvvBxUco8GfHH7fA12EnEQ25JDUdXNTSUhL78UE/jmxMNv1if87OGLxQG5vPxv0JelgPBfxwTURQn0aBPETl7lm/IGBhsNZCr8KJoPqNaN1FjeqIAmgBk0I3v9/V67rVZJARO0Nn5Wwn6DD4d7vEIEyHu/tGHaioObNEGX5ul4s+j23nY3iXhM75TISzUFpPx/5FyH/xclec+k6lFHA=
