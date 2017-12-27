@@ -30,25 +30,4 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     singleRun: false
   });
-  module.exports = function karmaConfig (config) {
-    config.set({
-        ...
-        reporters: [
-            ...
-            // Reference: https://github.com/karma-runner/karma-coverage
-            // Output code coverage files
-            'coverage'
-        ],
-        // Configure code coverage reporter
-        coverageReporter: {
-            reporters: [
-                // generates ./coverage/lcov.info
-                {type:'lcovonly', subdir: '.'},
-                // generates ./coverage/coverage-final.json
-                {type:'json', subdir: '.'},
-            ]
-        },
-        ...
-    });
-};
 };
