@@ -14,8 +14,6 @@ services:
 - docker
 script:
 - ng build --prod
-- codecov:
-    token: f05de1d3-79a8-442c-a5c8-06fd45ce0386
 after_success:
 - if  [ $TRAVIS_PULL_REQUEST = "false" ]; then export REPO=avneetsingh/travis;
   docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" && docker build -f Dockerfile -t $REPO:$COMMIT . && docker push $REPO;
